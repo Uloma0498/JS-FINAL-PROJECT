@@ -1,20 +1,10 @@
+// Store all movies globally
+let allMovies = [];
 
-function filterMovies(event) {
-  const filter = event.target.value;
+// Define renderMovies BEFORE main()
+function renderMovies(movies) {
   const moviesContainer = document.querySelector(".movies");
-
-  let movies = filterMoviesByYear(window.allMovies, document.getElementById("yearFilter").value);
   
-  if (filter === "NEWEST_TO_OLDEST") {
-    renderMovies(movies.sort((a, b) => b.Year - a.Year));
-  } else if (filter === "OLDEST_TO_NEWEST") {
-    renderMovies(movies.sort((a, b) => a.Year - b.Year));
-  } else if (filter === "A_Z") {
-    renderMovies(movies.sort((a, b) => a.Title.localeCompare(b.Title)));
-  } else if (filter === "Z_A") {
-    renderMovies(movies.sort((a, b) => b.Title.localeCompare(a.Title)));
-  }
-
   const moviesHTML = movies
     .map((movie) => {
       return `
@@ -28,36 +18,37 @@ function filterMovies(event) {
       `;
     })
     .join("");
-
   moviesContainer.innerHTML = moviesHTML;
+}
+
+function filterMovies(event) {
+  const filter = event.target.value;
+  let movies = [...allMovies]; // Create a copy
+  
+  if (filter === "NEWEST_TO_OLDEST") {
+    movies.sort((a, b) => b.Year - a.Year);
+  } else if (filter === "OLDEST_TO_NEWEST") {
+    movies.sort((a, b) => a.Year - b.Year);
+  } else if (filter === "A_Z") {
+    movies.sort((a, b) => a.Title.localeCompare(b.Title));
+  } else if (filter === "Z_A") {
+    movies.sort((a, b) => b.Title.localeCompare(a.Title));
+  }
+  
+  renderMovies(movies);
 }
 
 async function main() {
   const response = await fetch("https://www.omdbapi.com/?apikey=2cc30c4d&s=fast");
   const data = await response.json();
-  console.log(data); // to confirm it's working
-  renderMovies(data.Search);
+  console.log(data);
+  allMovies = data.Search; // Store globally
+  renderMovies(allMovies);
 }
 
 main();
 
 
-
-
-`function renderMovies(filter) {
-  const moviesContainer = document.querySelector(".movies");
-
-  let movies = filter;
-
-  if (filter === 'NEWEST_TO_OLDEST') {
-    movies = movies.sort((a, b) => b.Year - a.Year);
-  } else if (filter === 'OLDEST_TO_NEWEST') {
-    movies = movies.sort((a, b) => a.Year - b.Year);
-  } else if (filter === 'A_Z') {
-    movies = movies.sort((a, b) => a.Title.localeCompare(b.Title));
-  } else if (filter === 'Z_A') {
-    movies = movies.sort((a, b) => b.Title.localeCompare(a.Title));
-  }`
 
 
 //fake data 

@@ -19,7 +19,7 @@ function displayResults(movies) {
         return;
     }
 
-    movies.forEach(movie => {
+    movies.slice(0, 1).forEach(movie => {
         const movieDiv = document.createElement('div');
         movieDiv.innerHTML = `<h3>${movie.Title}</h3><p><b>Year:</b>${movie.Year}</p><img src="${movie.Poster}" alt="${movie.Title} Poster" />`;
         resultsDiv.appendChild(movieDiv);

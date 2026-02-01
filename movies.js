@@ -1,3 +1,33 @@
+document.getElementById('search-form').addEventListener('submit', function(event) {
+    event.preventDefault(); 
+    const query = document.getElementById('search-input').value;
+
+    fetch(`https://www.omdbapi.com/?apikey=2cc30c4d&s=${query}`)
+        .then(response => response.json())
+        .then(data => {
+            displayResults(data.Search);
+        })
+        .catch(error => console.error('Error fetching data:', error));
+});
+
+function displayResults(movies) {
+    const resultsDiv = document.getElementById('results');
+    resultsDiv.innerHTML = '';
+
+    if (movies.length === 0) {
+        resultsDiv.innerHTML = '<p>No movies found.</p>';
+        return;
+    }
+
+    movies.forEach(movie => {
+        const movieDiv = document.createElement('div');
+        movieDiv.innerHTML = `<h3>${movie.Title}</h3><p><b>Year:</b>${movie.Year}</p><img src="${movie.Poster}" alt="${movie.Title} Poster" />`;
+        resultsDiv.appendChild(movieDiv);
+    });
+}
+
+
+
 // Store all movies globally
 let allMovies = [];
 
@@ -47,8 +77,6 @@ async function main() {
 }
 
 main();
-
-
 
 
 //fake data 

@@ -6,6 +6,7 @@
     font-family: 'Roboto', sans-serif;
 }
 
+
 html {
     scroll-behavior: smooth;
 }
@@ -230,6 +231,9 @@ img {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .row__column{
@@ -324,6 +328,24 @@ FEATURES
 }
 
 .books {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.books__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    width: 50%;
+}
+
+.books__header--title {
+    font-size: 32px;
+    margin-bottom: 0;
+}
+
+.movies {
     display: flex;
     flex-wrap: wrap;
 }

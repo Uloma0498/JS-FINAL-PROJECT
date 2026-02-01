@@ -50,19 +50,23 @@
         <div class="row">
           <div class="books__header">
             <h2 class="section__title books__header--title">
-              Search <span class="purple">Movies</span>
+              Browse our <span class="purple">Movies</span>
             </h2>
+            <form id="search-form">
+        <input type="text" id="search-input" placeholder="Search for movies..." onchange="displayResults(movies)">
+        <button type="submit">Search</button>
+    </form>
+          </div>
+          <div class="books__filter">
+            <div id="results"></div>
             <select id="filter" onchange="filterMovies(event)">
-              <option value="" disabled selected>Search movies</option>
+              <option value="" disabled selected>Sort</option>
               <option value="NEWEST_TO_OLDEST"> Year, Newest to Oldest</option>
               <option value="OLDEST_TO_NEWEST"> Year, Oldest to Newest</option>
               <option value="A_Z">A-Z</option>
               <option value="Z_A">Z-A</option>
             </select>
-          </div>
-          <div class="movies">
-            <i class="fas fa-spinner books__loading--spinner"></i>
-          </div>
+            </div>
         </div>
       </div>
     </section>
